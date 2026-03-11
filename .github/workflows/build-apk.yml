@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -17,16 +18,13 @@ jobs:
       - name: Build React UI
         run: npm run build
 
-      # NO-HUNT FIX: This creates the missing folder and moves your file there automatically
-      - name: Fix Android Resource Paths
-        run: |
-          mkdir -p android/app/src/main/res/xml
-          cp network_security_config.xml android/app/src/main/res/xml/ || true
-          # Also remove the line from Manifest just in case the file copy fails
-          sed -i '/android:networkSecurityConfig/d' android/app/src/main/AndroidManifest.xml
-
       - name: Build Debug APK
         run: |
+          # Create the missing security file right before the build starts
+          mkdir -p android/app/src/main/res/xml
+          echo '<?xml version="1.0" encoding="utf-8"?><network-security-config><base-config cleartextTrafficPermitted="true" /></network-security-config>' > android/app/src/main/res/xml/network_security_config.xml
+          
+          # Launch the Gradle build
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
@@ -34,5 +32,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: SageUI-Final-APK
+          name: SageUI-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
