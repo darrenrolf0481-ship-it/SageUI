@@ -17,8 +17,8 @@ jobs:
       - name: Build React UI
         run: npm run build
 
-      # THIS IS THE FIX: It moves the file for you so the build doesn't fail
-      - name: Sync Security Config
+      # AUTOMATED FOLDER FIX: Moves your config file to the secret Android location
+      - name: Inject Android Security Config
         run: |
           mkdir -p android/app/src/main/res/xml
           cp network_security_config.xml android/app/src/main/res/xml/
@@ -32,5 +32,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: sage-ui-apk
+          name: phi-sentinel-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
