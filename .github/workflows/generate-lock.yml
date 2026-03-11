@@ -1,0 +1,19 @@
+name: Generate Lockfile
+on: workflow_dispatch # This lets you press a button to start it
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Generate Lock
+        run: |
+          npm i --package-lock-only
+          git config --global user.name 'Sentinel-Auto'
+          git config --global user.email 'sentinel@bot.com'
+          git add package-lock.json
+          git commit -m "chore: auto-generate package-lock.json"
+          git push
+          
