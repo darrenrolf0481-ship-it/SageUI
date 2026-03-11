@@ -1,5 +1,4 @@
 name: build-android
-
 on:
   push:
     branches: [main, master]
