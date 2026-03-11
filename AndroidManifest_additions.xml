@@ -1,36 +1,40 @@
-<!--
-  ADD THESE to android/app/src/main/AndroidManifest.xml
-  inside the <manifest> tag, before <application>
--->
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!-- Network — required for Ollama/Bridge/Gemini calls -->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
-<!-- Camera — VisionMatrix -->
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-feature android:name="android.hardware.camera" android:required="false" />
-<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+        <activity
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBarLaunch"
+            android:launchMode="singleTask"
+            android:exported="true">
 
-<!-- Microphone — EVP / audio forensics -->
-<uses-permission android:name="android.permission.RECORD_AUDIO" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
-<!-- Sensors — accelerometer feeds into neurochemistry -->
-<uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
-<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+        </activity>
 
-<!-- Wake lock — keep screen on during investigation -->
-<uses-permission android:name="android.permission.WAKE_LOCK" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
 
-<!-- Vibration — haptic on QUANTUM_SYNCHRONICITY_EVENT -->
-<uses-permission android:name="android.permission.VIBRATE" />
+    </application>
 
-<!-- Local network access for Ollama/Bridge (Android 12+) -->
-<!-- Also add to <application>: android:usesCleartextTraffic="true" -->
-
-<!--
-  ALSO ADD to the <activity> tag:
-    android:screenOrientation="portrait"
-    android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-    android:windowSoftInputMode="adjustResize"
--->
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>
