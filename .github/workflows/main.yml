@@ -46,13 +46,10 @@ jobs:
             </base-config>
           </network-security-config>
           EOF
-
       - name: Make Gradle wrapper executable
         run: chmod +x android/gradlew
-
       - name: Build Debug APK
         run: cd android && ./gradlew assembleDebug --no-daemon
-
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
