@@ -1,0 +1,30 @@
+{
+  "appId": "com.sage.phisentinel",
+  "appName": "Φ_SENTINEL",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "android": {
+    "buildOptions": {
+      "keystorePath": "phi-sentinel-release.keystore",
+      "keystoreAlias": "phi-sentinel"
+    }
+  },
+  "plugins": {
+    "Camera": {
+      "permissions": ["camera"]
+    },
+    "Motion": {
+      "permissions": ["motion"]
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#050505",
+      "overlaysWebView": false
+    }
+  },
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "hostname": "phi-sentinel.sage"
+  }
+}

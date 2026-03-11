@@ -1,0 +1,36 @@
+<!--
+  ADD THESE to android/app/src/main/AndroidManifest.xml
+  inside the <manifest> tag, before <application>
+-->
+
+<!-- Network — required for Ollama/Bridge/Gemini calls -->
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+<!-- Camera — VisionMatrix -->
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-feature android:name="android.hardware.camera" android:required="false" />
+<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
+<!-- Microphone — EVP / audio forensics -->
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+<!-- Sensors — accelerometer feeds into neurochemistry -->
+<uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+
+<!-- Wake lock — keep screen on during investigation -->
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+
+<!-- Vibration — haptic on QUANTUM_SYNCHRONICITY_EVENT -->
+<uses-permission android:name="android.permission.VIBRATE" />
+
+<!-- Local network access for Ollama/Bridge (Android 12+) -->
+<!-- Also add to <application>: android:usesCleartextTraffic="true" -->
+
+<!--
+  ALSO ADD to the <activity> tag:
+    android:screenOrientation="portrait"
+    android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
+    android:windowSoftInputMode="adjustResize"
+-->
